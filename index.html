@@ -71,7 +71,19 @@ section{padding:clamp(80px,10vw,130px) 0 clamp(60px,7vw,90px)}
 .gal figure{margin:0;position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
 .gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
 .gal figure:last-child img{aspect-ratio:auto}
+.gal{align-items:stretch}
 .gal figcaption{position:absolute;left:16px;top:16px;background:rgba(3,24,43,.8);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:7px 14px;font:600 11px 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.ba{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);aspect-ratio:900/1205;user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba.sq{aspect-ratio:1/1}
+.ba .before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.ba .bar{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:#fff;pointer-events:none}
+.ba .bar i{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font:700 15px/1 'DM Sans',sans-serif;font-style:normal;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.ba .lb{position:absolute;top:16px;z-index:2;background:rgba(3,24,43,.8);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:7px 14px;font:600 11px 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+.ba .lb.l{left:16px}.ba .lb.r{right:16px;color:var(--y)}
+.ba .hint2{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(3,24,43,.75);border-radius:30px;padding:6px 14px;font-size:13px;color:#CFD6DE;pointer-events:none;white-space:nowrap}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba:has(input:focus-visible) .bar i{outline:3px solid var(--y);outline-offset:3px}
 .after{text-align:center;margin-top:40px}
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:56px}
@@ -192,12 +204,26 @@ footer a{color:#CFD6DE}
   <div class="wrap center reveal">
     <span class="tag">Projetos</span>
     <h2>Do render ao canteiro, <span class="y">sem surpresa na obra.</span></h2>
-    <p class="lead">Balanços, vãos livres e fachadas assim só ficam de pé com o cálculo certo por trás.</p>
+    <p class="lead">Arraste e veja: balanços, vãos livres e fachadas assim só ficam de pé com o cálculo certo por trás.</p>
   </div>
   <div class="wrap">
     <div class="gal reveal">
-      <figure><img src="capa.jpg" alt="Sobrado com laje em balanço e fachada em pedra e madeira" loading="lazy"><figcaption>Sobrado com balanço</figcaption></figure>
-      <figure><img src="casa-01.jpg" alt="Residência de dois pavimentos com varanda em balanço" loading="lazy"><figcaption>Residência de dois pavimentos</figcaption></figure>
+      <div class="ba" style="--pos:50%">
+        <img src="depois-fachada.jpg" alt="Sobrado pronto com fachada em pedra e madeira" loading="lazy">
+        <img class="before" src="antes-estrutura.jpg" alt="Estrutura em concreto do mesmo sobrado, com pilares, vigas e lajes em balanço" loading="lazy">
+        <span class="lb l">Estrutura</span><span class="lb r">Fachada</span>
+        <span class="bar" aria-hidden="true"><i>‹ ›</i></span>
+        <span class="hint2">arraste para comparar</span>
+        <input type="range" min="0" max="100" value="50" step="1" aria-label="Comparar estrutura e fachada">
+      </div>
+      <div class="ba sq" style="--pos:50%">
+        <img src="depois-fachada-2.jpg" alt="Residência pronta de dois pavimentos com fachada em concreto e madeira" loading="lazy">
+        <img class="before" src="antes-estrutura-2.jpg" alt="Estrutura em concreto da mesma residência, com pilares, vigas e laje em balanço" loading="lazy">
+        <span class="lb l">Estrutura</span><span class="lb r">Fachada</span>
+        <span class="bar" aria-hidden="true"><i>‹ ›</i></span>
+        <span class="hint2">arraste para comparar</span>
+        <input type="range" min="0" max="100" value="50" step="1" aria-label="Comparar estrutura e fachada da residência">
+      </div>
     </div>
     <div class="after"><a class="btn bp" href="#orcamento">Quero isso no meu projeto <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h12M10 4l5 5-5 5"/></svg></a></div>
   </div>
@@ -379,6 +405,7 @@ footer a{color:#CFD6DE}
   [nome, disc, obra].forEach(el => el.addEventListener('input', update));
   send.addEventListener('click', e => { if (!nome.value.trim()) { e.preventDefault(); err.textContent = 'Escreva seu nome para abrir a conversa.'; nome.focus(); } });
   $('f').addEventListener('submit', e => e.preventDefault());
+  document.querySelectorAll('.ba').forEach(b => { const r = b.querySelector('input'); r.addEventListener('input', () => b.style.setProperty('--pos', r.value + '%')); });
   const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
