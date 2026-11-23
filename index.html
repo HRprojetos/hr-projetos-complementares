@@ -97,7 +97,9 @@ section{padding:clamp(80px,10vw,130px) 0 clamp(60px,7vw,90px)}
 .sheet{margin:0;background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
 .sheet img{width:100%}
 .sheet figcaption{background:var(--bg2);color:var(--mute);font-size:14px;padding:14px 18px}
-.sheet.wide{margin-top:20px}
+.sheets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:56px}
+.sheets img{aspect-ratio:16/10;object-fit:contain;background:#fff;padding:8px}
+.sheet figcaption b{color:var(--y);font-weight:600}
 .item{display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
 .item .ck{width:44px;height:44px;border-radius:50%;background:var(--y);color:var(--navy);display:grid;place-items:center}
 .item p{color:var(--soft);font-size:16px;margin-top:4px}
@@ -119,6 +121,7 @@ section{padding:clamp(80px,10vw,130px) 0 clamp(60px,7vw,90px)}
 .about .lead{max-width:none}
 .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
 .nums div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.nums .full{grid-column:1/-1}
 .nums b{display:block;font:700 30px/1.1 Outfit,sans-serif;color:var(--y)}
 .nums span{color:var(--mute);font-size:14px}
 /* faq */
@@ -146,7 +149,7 @@ footer a{color:#CFD6DE}
 .js .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media(max-width:900px){.head nav{display:none}.head .btn{margin-left:auto}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:760px){.deliv,.prob,.about,.contact .grid,.who,.gal{grid-template-columns:minmax(0,1fr)}.gal img{aspect-ratio:4/5}.gal figure:last-child img{aspect-ratio:1/1}.hero{padding-top:120px}.hero>img{object-position:72% 50%;opacity:.4}.hero:before{background:linear-gradient(to bottom,rgba(3,24,43,.7) 0%,rgba(3,24,43,.88) 60%,var(--bg) 100%)}}
+@media(max-width:760px){.sheets,.deliv,.prob,.about,.contact .grid,.who,.gal{grid-template-columns:minmax(0,1fr)}.gal img{aspect-ratio:4/5}.gal figure:last-child img{aspect-ratio:1/1}.hero{padding-top:120px}.hero>img{object-position:72% 50%;opacity:.4}.hero:before{background:linear-gradient(to bottom,rgba(3,24,43,.7) 0%,rgba(3,24,43,.88) 60%,var(--bg) 100%)}}
 @media(max-width:560px){.steps{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat b{font-size:22px}.ctas .btn{width:100%}.head .brand span{display:none}}
 </style>
 </head>
@@ -172,7 +175,7 @@ footer a{color:#CFD6DE}
     <span class="tag">Para engenheiros e arquitetos</span>
     <h1>Seu projeto calculado e <span class="y">pronto pra obra.</span></h1>
     <p class="lead">Você manda o arquitetônico e recebe os <b>projetos complementares compatibilizados</b>, com <b>ART</b>. Sem contratar equipe e sem custo fixo.</p>
-    <p class="hint">Você só aciona quando fecha uma obra.</p>
+    <p class="hint">Projeto feito por quem também já construiu. Você só aciona quando fecha uma obra.</p>
     <div class="ctas">
       <a class="btn bp" href="#orcamento">Pedir orçamento no WhatsApp <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h12M10 4l5 5-5 5"/></svg></a>
       <a class="btn bo" href="#projetos">Ver projetos</a>
@@ -261,7 +264,22 @@ footer a{color:#CFD6DE}
         <div class="item"><span class="ck"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 9.5l4 4 8-9"/></svg></span><div><h3>ART emitida</h3><p>Responsabilidade técnica registrada, entregue junto com as pranchas.</p></div></div>
       </div>
     </div>
-    <figure class="sheet wide reveal"><img src="prancha-planta.jpg" alt="Planta de esgoto do pavimento térreo de um centro odontológico" loading="lazy"><figcaption>Projeto entregue: hidrossanitário de um centro odontológico em Petrolina/PE</figcaption></figure>
+  </div>
+</section>
+
+<section class="s3" id="pranchas">
+  <div class="wrap center reveal">
+    <span class="tag">Portfólio técnico</span>
+    <h2>Pranchas que a obra <span class="y">consegue executar.</span></h2>
+    <p class="lead">Recortes de projetos reais entregues. Cada detalhe com diâmetro, inclinação e posição, sem deixar dúvida para o mestre de obras.</p>
+  </div>
+  <div class="wrap">
+    <div class="sheets reveal">
+      <figure class="sheet"><img src="prancha-caixa.jpg" alt="Isométrico dos reservatórios superiores com alimentação, extravasor e limpeza" loading="lazy"><figcaption><b>Hidrossanitário</b> · reservatórios em isométrico · edifício residencial, João Pessoa/PB</figcaption></figure>
+      <figure class="sheet"><img src="prancha-recalque.jpg" alt="Isométrico do sistema de recalque e do barrilete de hidrômetros" loading="lazy"><figcaption><b>Hidrossanitário</b> · recalque e hidrômetros · edifício residencial, João Pessoa/PB</figcaption></figure>
+      <figure class="sheet"><img src="prancha-planta.jpg" alt="Planta de esgoto do pavimento térreo de um centro odontológico" loading="lazy"><figcaption><b>Hidrossanitário</b> · planta de esgoto · centro odontológico, Petrolina/PE</figcaption></figure>
+      <figure class="sheet"><img src="prancha-eletrico-planta.jpg" alt="Planta elétrica do térreo com circuitos, pontos e quadros" loading="lazy"><figcaption><b>Elétrico</b> · planta de circuitos e pontos · centro odontológico, Petrolina/PE</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -292,10 +310,11 @@ footer a{color:#CFD6DE}
     <div>
       <span class="tag">Quem faz o seu projeto</span>
       <h2>Eng. Hélvio <span class="y">Rickhardson</span></h2>
-      <p class="lead">Engenheiro civil, formado em 2021, com mais de 9 anos trabalhando com projetos, desde antes da formatura. Foi instrutor de cursos de Revit e de IA no IFPB e usa essa bagagem para entregar projetos claros, que o cliente entende e a obra executa.</p>
+      <p class="lead">Engenheiro civil, formado em 2021, com mais de 9 anos trabalhando com projetos, desde antes da formatura. Além de projetar, também já construiu: conhece o canteiro por dentro e sabe o que funciona na execução. Foi instrutor de cursos de Revit e de IA no IFPB e usa essa bagagem para entregar projetos claros, que o cliente entende e a obra executa.</p>
       <div class="nums">
         <div><b>+200</b><span>projetos entregues em 9 estados</span></div>
         <div><b>Ex-instrutor</b><span>de Revit e de IA no IFPB</span></div>
+        <div class="full"><b>Projeta e constrói</b><span>projeto pensado por quem já esteve do outro lado, na execução da obra</span></div>
       </div>
     </div>
   </div>
